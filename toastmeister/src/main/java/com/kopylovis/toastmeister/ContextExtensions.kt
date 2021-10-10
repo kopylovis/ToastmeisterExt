@@ -12,16 +12,22 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import com.kopylovis.toastmeister.ToastMeister.TOASTERMEISTER_CARDVIEW_CORNER_RADIUS_DEFAULT
-import com.kopylovis.toastmeister.ToastMeister.TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT
-import com.kopylovis.toastmeister.ToastMeister.TOASTERMEISTER_ICON_SIZE_DEFAULT
-import com.kopylovis.toastmeister.ToastMeister.TOASTERMEISTER_TEXT_SIZE_DEFAULT
+import com.kopylovis.toastmeister.ToastMeister.GRAVITY_TOP
+import com.kopylovis.toastmeister.ToastMeister.LENGTH_SHORT
 
-fun Context.errorToast(@StringRes message: Int, duration: Int, gravity: Int): Toast {
+fun Context.errorToast(@StringRes message: Int, duration: Int? = null, gravity: Int? = null): Toast {
     return errorToast(getString(message), duration, gravity)
 }
 
-fun Context.errorToast(message: String, duration: Int, gravity: Int): Toast {
+fun Context.defaultToast(@StringRes message: Int, duration: Int? = null, gravity: Int? = null): Toast {
+    return defaultToast(getString(message), duration, gravity)
+}
+
+fun Context.defaultToast(message: String, duration: Int? = null, gravity: Int? = null): Toast {
+    return toastUtilsDefault(this, message, duration, gravity)
+}
+
+fun Context.errorToast(message: String, duration: Int? = null, gravity: Int? = null): Toast {
     return toastUtils(
         this, message, duration, gravity, TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT,
         this.getColor(R.color.toastmeister_red), TOASTERMEISTER_CARDVIEW_CORNER_RADIUS_DEFAULT, this.getColor(R.color.white), TOASTERMEISTER_TEXT_SIZE_DEFAULT,
@@ -29,11 +35,11 @@ fun Context.errorToast(message: String, duration: Int, gravity: Int): Toast {
     )
 }
 
-fun Context.infoToast(@StringRes message: Int, duration: Int, gravity: Int): Toast {
+fun Context.infoToast(@StringRes message: Int, duration: Int? = null, gravity: Int? = null): Toast {
     return infoToast(getString(message), duration, gravity)
 }
 
-fun Context.infoToast(message: String, duration: Int, gravity: Int): Toast {
+fun Context.infoToast(message: String, duration: Int? = null, gravity: Int? = null): Toast {
     return toastUtils(
         this, message, duration, gravity, TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT,
         this.getColor(R.color.toastmeister_yellow), TOASTERMEISTER_CARDVIEW_CORNER_RADIUS_DEFAULT, this.getColor(R.color.white), TOASTERMEISTER_TEXT_SIZE_DEFAULT,
@@ -41,11 +47,11 @@ fun Context.infoToast(message: String, duration: Int, gravity: Int): Toast {
     )
 }
 
-fun Context.successToast(@StringRes message: Int, duration: Int, gravity: Int): Toast {
+fun Context.successToast(@StringRes message: Int, duration: Int? = null, gravity: Int? = null): Toast {
     return successToast(getString(message), duration, gravity)
 }
 
-fun Context.successToast(message: String, duration: Int, gravity: Int): Toast {
+fun Context.successToast(message: String, duration: Int? = null, gravity: Int? = null): Toast {
     return toastUtils(
         this, message, duration, gravity, TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT,
         this.getColor(R.color.toastmeister_green), TOASTERMEISTER_CARDVIEW_CORNER_RADIUS_DEFAULT, this.getColor(R.color.white), TOASTERMEISTER_TEXT_SIZE_DEFAULT,
@@ -53,11 +59,11 @@ fun Context.successToast(message: String, duration: Int, gravity: Int): Toast {
     )
 }
 
-fun Context.normalToast(@StringRes message: Int, duration: Int, gravity: Int): Toast {
+fun Context.normalToast(@StringRes message: Int, duration: Int? = null, gravity: Int? = null): Toast {
     return normalToast(getString(message), duration, gravity)
 }
 
-fun Context.normalToast(message: String, duration: Int, gravity: Int): Toast {
+fun Context.normalToast(message: String, duration: Int? = null, gravity: Int? = null): Toast {
     return toastUtils(
         this, message, duration, gravity, TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT,
         this.getColor(R.color.toastmeister_blue), TOASTERMEISTER_CARDVIEW_CORNER_RADIUS_DEFAULT, this.getColor(R.color.white), TOASTERMEISTER_TEXT_SIZE_DEFAULT,
@@ -109,12 +115,29 @@ fun Context.customToast(
 
 private var currentToast: Toast? = null
 
+private fun toastUtilsDefault(
+    context: Context,
+    message: String,
+    duration: Int?,
+    gravity: Int?
+): Toast {
+    val gravityOffset = if (gravity == GRAVITY_TOP) Gravity.TOP else Gravity.BOTTOM
+    return Toast.makeText(context, message, duration ?: LENGTH_SHORT).apply {
+        setGravity(gravityOffset, 0, context.convertDpToPixelsInt(TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT))
+        this.duration = duration ?: LENGTH_SHORT
+        currentToast?.cancel()
+        currentToast = this
+    }
+}
+
+
+
 @SuppressLint("InflateParams")
 private fun toastUtils(
     context: Context,
     message: CharSequence,
-    duration: Int,
-    gravity: Int,
+    duration: Int? = null,
+    gravity: Int? = null,
     offset: Int?,
     backgroundColor: Int,
     backgroundCornerRadius: Int?,
@@ -153,12 +176,12 @@ private fun toastUtils(
         this.layoutParams = params
     }
     customToast.apply {
-        val gravityOffset = if (gravity == ToastMeister.GRAVITY_TOP) Gravity.TOP else Gravity.BOTTOM
+        val gravityOffset = if (gravity == GRAVITY_TOP) Gravity.TOP else Gravity.BOTTOM
         setGravity(gravityOffset, 0, context.convertDpToPixelsInt(offset ?: TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT))
-        this.duration = duration
+        this.duration = duration ?: LENGTH_SHORT
         view = layout
         currentToast?.cancel()
-        currentToast = customToast
+        currentToast = this
     }
     return customToast
 }
@@ -183,3 +206,8 @@ private fun Context.convertPixelsToDp(pixels: Float): Float {
     val metrics = resources.displayMetrics
     return (pixels * DisplayMetrics.DENSITY_DEFAULT) / metrics.densityDpi.toFloat()
 }
+
+private const val TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT = 70
+private const val TOASTERMEISTER_TEXT_SIZE_DEFAULT = 16
+private const val TOASTERMEISTER_ICON_SIZE_DEFAULT = 24
+private const val TOASTERMEISTER_CARDVIEW_CORNER_RADIUS_DEFAULT = 17

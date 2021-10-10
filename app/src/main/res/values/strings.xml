@@ -5,4 +5,5 @@
     <string name="toastmeister_lib_normal_toast">Normal Toast</string>
     <string name="toastmeister_lib_info_toast">Info Toast</string>
     <string name="toastmeister_lib_custom_toast">Custom Toast</string>
+    <string name="toastmeister_lib_default_toast">Default Toast</string>
 </resources>

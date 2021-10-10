@@ -49,8 +49,17 @@
         android:id="@+id/amButtonCustomToast"
         style="@style/ToastmeisterTextButton"
         android:text="@string/toastmeister_lib_custom_toast"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/amButtonDefaultToast"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/amButtonInfoToast" />
+
+    <Button
+        android:id="@+id/amButtonDefaultToast"
+        style="@style/ToastmeisterTextButton"
+        android:text="@string/toastmeister_lib_default_toast"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amButtonCustomToast" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             amButtonErrorToast.setOnClickListener(this@MainActivity)
             amButtonInfoToast.setOnClickListener(this@MainActivity)
             amButtonCustomToast.setOnClickListener(this@MainActivity)
+            amButtonDefaultToast.setOnClickListener(this@MainActivity)
         }
     }
 
@@ -37,9 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.apply {
             when (v?.id) {
                 amButtonNormalToast.id -> this@MainActivity.normalToast(
-                    NORMAL_TOAST,
-                    ToastMeister.LENGTH_SHORT,
-                    ToastMeister.GRAVITY_BOTTOM
+                    NORMAL_TOAST
                 ).show()
                 amButtonSuccessToast.id -> this@MainActivity.successToast(
                     R.string.toastmeister_lib_success_toast,
@@ -70,6 +69,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     30,
                     30
                 ).show()
+                amButtonDefaultToast.id -> this@MainActivity.defaultToast(
+                    R.string.toastmeister_lib_default_toast).show()
             }
         }
     }

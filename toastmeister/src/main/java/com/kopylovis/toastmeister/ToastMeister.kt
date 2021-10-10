@@ -6,8 +6,4 @@ object ToastMeister {
         const val LENGTH_SHORT = 2000
         const val LENGTH_MIDDLE = 2750
         const val LENGTH_LONG = 3500
-        const val TOASTERMEISTER_GRAVITY_OFFSET_DEFAULT = 70
-        const val TOASTERMEISTER_TEXT_SIZE_DEFAULT = 16
-        const val TOASTERMEISTER_ICON_SIZE_DEFAULT = 24
-        const val TOASTERMEISTER_CARDVIEW_CORNER_RADIUS_DEFAULT = 17
 }
