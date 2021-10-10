@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Toastmeister SampleApp</string>
+    <string name="toastmeister_lib_success_toast">Success Toast</string>
+    <string name="toastmeister_lib_error_toast">Error Toast</string>
+    <string name="toastmeister_lib_normal_toast">Normal Toast</string>
+    <string name="toastmeister_lib_info_toast">Info Toast</string>
+    <string name="toastmeister_lib_custom_toast">Custom Toast</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="toastmeister_green">#73be52</color>
+    <color name="toastmeister_red">#fa5c48</color>
+    <color name="toastmeister_yellow">#ffca38</color>
+    <color name="toastmeister_blue">#3aa0bd</color>
+    <color name="colorPrimary">#215798</color>
+    <color name="accent">#AB4195</color>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/amButtonNormalToast"
+        style="@style/ToastmeisterTextButton"
+        android:text="@string/toastmeister_lib_normal_toast"
+        app:layout_constraintBottom_toTopOf="@id/amButtonSuccessToast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/amButtonSuccessToast"
+        style="@style/ToastmeisterTextButton"
+        android:text="@string/toastmeister_lib_success_toast"
+        app:layout_constraintBottom_toTopOf="@id/amButtonErrorToast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amButtonNormalToast"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/amButtonErrorToast"
+        style="@style/ToastmeisterTextButton"
+        android:text="@string/toastmeister_lib_error_toast"
+        app:layout_constraintBottom_toTopOf="@id/amButtonInfoToast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amButtonSuccessToast" />
+
+    <Button
+        android:id="@+id/amButtonInfoToast"
+        style="@style/ToastmeisterTextButton"
+        android:text="@string/toastmeister_lib_info_toast"
+        app:layout_constraintBottom_toTopOf="@id/amButtonCustomToast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amButtonErrorToast" />
+
+    <Button
+        android:id="@+id/amButtonCustomToast"
+        style="@style/ToastmeisterTextButton"
+        android:text="@string/toastmeister_lib_custom_toast"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amButtonInfoToast" />
+</androidx.constraintlayout.widget.ConstraintLayout>
